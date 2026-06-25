@@ -88,32 +88,24 @@ function doLogin() {
     starfield.appendChild(star);
   }
 
-  // 视频播完跳转
-  video.addEventListener('ended', function() {
+  // 跳转函数
+  let jumped = false;
+  function doRedirect() {
+    if (jumped) return;
+    jumped = true;
+    video.pause();
     overlay.classList.add('fadeout');
     setTimeout(() => {
       sessionStorage.setItem('jxb_logged_in', 'true');
       window.location.href = 'index.html';
     }, 600);
-  });
+  }
 
-  // 播放视频
-  video.play().catch(() => {
-    // 如果自动播放被阻止，显示播放按钮
-    video.muted = true;
-    video.play();
-  });
+  video.addEventListener('ended', doRedirect);
+  video.play().catch(() => { video.muted = true; video.play(); });
 
-  // 兜底：如果视频卡住超时15秒强制跳转
-  setTimeout(() => {
-    if (!sessionStorage.getItem('jxb_logged_in')) {
-      overlay.classList.add('fadeout');
-      setTimeout(() => {
-        sessionStorage.setItem('jxb_logged_in', 'true');
-        window.location.href = 'index.html';
-      }, 600);
-    }
-  }, 15000);
+  // 6秒后跳转
+  setTimeout(doRedirect, 6000);
 }
 
 // 回车登录
