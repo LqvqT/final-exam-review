@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Web技术（Java）考点 · 江小白的期末周</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="index.html" class="logo">
+    <span class="icon">📚</span> 江小白的期末周
+  </a>
+  <a href="index.html" class="back-btn">← 返回首页</a>
+</nav>
+
+<div class="detail-layout">
+
+<!-- ===== 侧边栏 ===== -->
+<aside class="sidebar">
+  <h4>📋 目录导航</h4>
+  <a href="#s1">一、HTML</a>
+  <a href="#s2">二、CSS</a>
+  <a href="#s3">三、JavaScript</a>
+  <a href="#s4">四、Servlet</a>
+  <a href="#s5">五、会话跟踪</a>
+  <a href="#s6">六、Filter & 转发/重定向</a>
+  <a href="#s7">七、JSP</a>
+  <a href="#s8">八、简单的Vue</a>
+  <a href="#s9">九、项目思维</a>
+</aside>
+
+<!-- ===== 正文 ===== -->
+<main class="content">
+
+<h1>🌐 Web技术（Java）期末考试考点汇总</h1>
+<p style="color:#888; font-size:0.9em;">📝 基于课堂12个PPT课件整理 · ⭐为高频考点</p>
+
+<!-- ==================== 一、HTML ==================== -->
+<h2 id="s1">一、HTML（超文本标记语言）</h2>
+
+<h3>1. Web标准三大组成部分</h3>
+<ul>
+  <li><strong>HTML</strong>：负责网页的<strong>结构</strong>（页面元素和内容）</li>
+  <li><strong>CSS</strong>：负责网页的<strong>表现</strong>（外观、位置、颜色、大小等样式）</li>
+  <li><strong>JavaScript</strong>：负责网页的<strong>行为</strong>（交互效果）</li>
+</ul>
+
+<h3>2. HTML基本概念</h3>
+<ul>
+  <li>HTML（HyperText Markup Language）：超文本标记语言</li>
+  <li>HTML标签预定义，由浏览器直接解析运行</li>
+  <li>特点：简易性、可扩展性、与平台无关、跨网络超文本链接</li>
+</ul>
+
+<h3>3. HTML5文档基本结构 ⭐</h3>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;!-- 页面内容 --&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+<h3>4. HTML元素与标签</h3>
+<ul>
+  <li><strong>成对标签</strong>：<code>&lt;标签名&gt; 内容 &lt;/标签名&gt;</code>（大多数）</li>
+  <li><strong>自闭合标签</strong>：<code>&lt;br&gt;</code>、<code>&lt;img&gt;</code>、<code>&lt;input&gt;</code>、<code>&lt;link&gt;</code>、<code>&lt;hr&gt;</code>（空元素，无内容）</li>
+  <li>标签大小写不敏感，<strong>建议小写</strong>；标签可嵌套</li>
+  <li>注释：<code>&lt;!-- 注释内容 --&gt;</code></li>
+</ul>
+
+<h3>5. HTML属性 ⭐</h3>
+<ul>
+  <li>格式：<code>&lt;标签名 属性名="属性值"&gt; 内容 &lt;/标签名&gt;</code></li>
+  <li>属性值始终用引号（双引号或单引号均可）</li>
+  <li><strong>全局属性</strong>（适用于所有元素）：
+    <ul>
+      <li><code>class</code>：指定类名，用于CSS/JS</li>
+      <li><code>id</code>：唯一标识符，用于CSS/JS</li>
+      <li><code>style</code>：内联CSS样式</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>6. DOCTYPE声明</h3>
+<ul>
+  <li><code>&lt;!DOCTYPE html&gt;</code> 是HTML5文档类型声明，<strong>必须放在最顶部</strong></li>
+  <li>告诉浏览器使用HTML5标准解析，避免"怪异模式"</li>
+  <li>HTML5声明比HTML4/XHTML更简洁</li>
+</ul>
+
+<h3>7. lang属性</h3>
+<ul>
+  <li><code>&lt;html lang="en"&gt;</code>（英文）/ <code>&lt;html lang="zh"&gt;</code>（中文）</li>
+</ul>
+
+<h3>8. head标签内容</h3>
+<ul>
+  <li><code>&lt;title&gt;</code>：页面标题</li>
+  <li><code>&lt;meta&gt;</code>：元数据（name、content、http-equiv属性）</li>
+  <li><code>&lt;link&gt;</code>：引入外部资源（如CSS）</li>
+  <li><code>&lt;style&gt;</code>：内部CSS样式</li>
+</ul>
+
+<h3>9. meta标签常用方式 ⭐</h3>
+<pre><code>&lt;meta charset="UTF-8"&gt;          &lt;!-- 字符编码 -->
+&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;  &lt;!-- 视口/响应式 -->
+&lt;meta http-equiv="refresh" content="5;url=https://example.com/"&gt;           &lt;!-- 5秒后跳转 --></code></pre>
+
+<h3>10. body标签属性（已过时，CSS替代）</h3>
+<table>
+  <tr><th>属性</th><th>说明</th><th>CSS替代</th></tr>
+  <tr><td>bgcolor</td><td>背景颜色</td><td>background-color</td></tr>
+  <tr><td>text</td><td>文本颜色</td><td>color</td></tr>
+  <tr><td>link</td><td>未访问链接颜色</td><td>a:link { color: ... }</td></tr>
+  <tr><td>vlink</td><td>已访问链接颜色</td><td>a:visited { color: ... }</td></tr>
+  <tr><td>alink</td><td>活动链接颜色</td><td>a:active { color: ... }</td></tr>
+  <tr><td>background</td><td>背景图片</td><td>background-image</td></tr>
+</table>
+
+<h3>11. 颜色表示</h3>
+<ul>
+  <li>英文名称：<code>red</code>、<code>blue</code>、<code>green</code>等</li>
+  <li>十六进制RGB：<code>#FF0000</code>（红）、<code>#000000</code>（黑）、<code>#FFFFFF</code>（白）</li>
+</ul>
+
+<h3>12. 标题标签</h3>
+<ul>
+  <li><code>&lt;h1&gt;</code> ~ <code>&lt;h6&gt;</code>，6级标题，h1最大、h6最小，显示为粗体</li>
+  <li>align属性（已过时）：left | center | right</li>
+</ul>
+
+<h3>13. 文字样式标签</h3>
+<ul>
+  <li><code>&lt;font face="字体" size="1-7" color="颜色"&gt;</code>（已过时，建议用CSS）</li>
+  <li><strong>物理样式</strong>：<code>&lt;b&gt;</code>粗体、<code>&lt;i&gt;</code>斜体、<code>&lt;u&gt;</code>下划线、<code>&lt;s&gt;</code>删除线、<code>&lt;sup&gt;</code>上标、<code>&lt;sub&gt;</code>下标、<code>&lt;big&gt;</code>大字体、<code>&lt;small&gt;</code>小字体</li>
+  <li><strong>逻辑样式</strong>：<code>&lt;strong&gt;</code>重点突出(粗体)、<code>&lt;em&gt;</code>强调(斜体)、<code>&lt;address&gt;</code>地址、<code>&lt;code&gt;</code>代码</li>
+</ul>
+
+<h3>14. 特殊字符 ⭐</h3>
+<table>
+  <tr><th>字符</th><th>转义码</th><th>字符</th><th>转义码</th></tr>
+  <tr><td>&lt;</td><td><code>&amp;lt;</code></td><td>"</td><td><code>&amp;quot;</code></td></tr>
+  <tr><td>&gt;</td><td><code>&amp;gt;</code></td><td>&amp;</td><td><code>&amp;amp;</code></td></tr>
+  <tr><td>空格</td><td><code>&amp;nbsp;</code></td><td>©</td><td><code>&amp;copy;</code></td></tr>
+</table>
+
+<h3>15. 段落与换行</h3>
+<ul>
+  <li><code>&lt;p&gt;</code>：段落标签，段前段后空一行（结束标签可省略但不推荐）</li>
+  <li><code>&lt;br&gt;</code>：换行标签，不插入空行</li>
+  <li><code>&lt;nobr&gt;</code>：禁止换行</li>
+  <li><code>&lt;hr&gt;</code>：水平线（可设size、width、align、color属性）</li>
+</ul>
+
+<h3>16. 多媒体标签 ⭐</h3>
+<p><strong>图像：</strong><code>&lt;img src="URL" alt="文字说明" width="宽" height="高"&gt;</code>（自闭合）</p>
+<ul>
+  <li>src和alt是<strong>必需属性</strong></li>
+  <li>属性：align（对齐）、border（边框，0为无边框）</li>
+</ul>
+<p><strong>视频：</strong></p>
+<pre><code>&lt;video width="320" height="240" controls="controls"&gt;
+    &lt;source src="movie.mp4" type="video/mp4" /&gt;
+    &lt;source src="movie.ogg" type="video/ogg" /&gt;
+&lt;/video&gt;</code></pre>
+<ul>
+  <li>属性：autoplay、controls、loop、muted、poster、preload</li>
+  <li>HTML5支持三种视频格式：MP4、WebM、OGG</li>
+</ul>
+
+<h3>17. 超链接 ⭐</h3>
+<pre><code>&lt;a href="URL" target="_blank|_self" title="提示文字"&gt;链接&lt;/a&gt;</code></pre>
+<ul>
+  <li><code>href</code>：目标URL（<code>#</code>回到顶部）</li>
+  <li><code>target="_self"</code>：当前窗口打开（默认）</li>
+  <li><code>target="_blank"</code>：新窗口打开</li>
+  <li><code>title</code>：鼠标悬停提示</li>
+</ul>
+
+<h3>18. 块级元素 vs 行内元素 ⭐</h3>
+<table>
+  <tr><th>特性</th><th>块级元素</th><th>行内元素</th></tr>
+  <tr><td>占行</td><td>独占一行</td><td>不独占一行</td></tr>
+  <tr><td>宽度</td><td>默认父容器100%</td><td>由内容决定</td></tr>
+  <tr><td>宽高设置</td><td>可以</td><td>无效</td></tr>
+  <tr><td>常见元素</td><td>&lt;div&gt;、&lt;p&gt;、&lt;h1&gt;-&lt;h6&gt;、&lt;ul&gt;、&lt;li&gt;、&lt;section&gt;</td><td>&lt;span&gt;、&lt;a&gt;、&lt;strong&gt;、&lt;img&gt;</td></tr>
+</table>
+<ul>
+  <li><code>&lt;div&gt;</code>：块级无语义元素，用于布局和分组</li>
+  <li><code>&lt;span&gt;</code>：行内无语义元素，用于样式化文本</li>
+  <li><code>&lt;div&gt;</code>可包含块级和行内元素；<code>&lt;span&gt;</code>只能包含行内元素</li>
+</ul>
+
+<h3>19. HTML5语义元素</h3>
+<ul>
+  <li><code>&lt;header&gt;</code>：页面/区块头部</li>
+  <li><code>&lt;nav&gt;</code>：导航区域</li>
+  <li><code>&lt;main&gt;</code>：页面核心内容（唯一）</li>
+  <li><code>&lt;section&gt;</code>：主题性区块</li>
+  <li><code>&lt;article&gt;</code>：独立完整的内容块</li>
+  <li><code>&lt;aside&gt;</code>：侧边栏/辅助内容</li>
+  <li><code>&lt;footer&gt;</code>：页面/区块底部</li>
+</ul>
+
+<h3>20. 表格 ⭐</h3>
+<pre><code>&lt;table border="1"&gt;
+    &lt;tr&gt;&lt;th&gt;表头1&lt;/th&gt;&lt;th&gt;表头2&lt;/th&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;数据1&lt;/td&gt;&lt;td&gt;数据2&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;</code></pre>
+<ul>
+  <li><code>colspan="n"</code>：跨n列合并（水平合并）</li>
+  <li><code>rowspan="n"</code>：跨n行合并（垂直合并）</li>
+  <li>cellpadding：单元格内边距 / cellspacing：单元格间距</li>
+</ul>
+
+<h3>21. 列表</h3>
+<ul>
+  <li><strong>无序列表</strong>：<code>&lt;ul type="disc|circle|square"&gt;&lt;li&gt;...&lt;/li&gt;&lt;/ul&gt;</code></li>
+  <li><strong>有序列表</strong>：<code>&lt;ol type="1|A|a|I|i"&gt;&lt;li&gt;...&lt;/li&gt;&lt;/ol&gt;</code></li>
+  <li><code>&lt;li&gt;</code>必须嵌套在<code>&lt;ul&gt;</code>或<code>&lt;ol&gt;</code>中使用</li>
+</ul>
+
+<h3>22. 表单 ⭐</h3>
+<pre><code>&lt;form action="提交URL" method="GET|POST"&gt;
+    &lt;input type="text|password|radio|checkbox|submit|button|file|hidden" name="名称" value="值"&gt;
+    &lt;select name="名称"&gt;&lt;option value="值"&gt;选项&lt;/option&gt;&lt;/select&gt;
+    &lt;textarea name="名称"&gt;&lt;/textarea&gt;
+&lt;/form&gt;</code></pre>
+<ul>
+  <li><strong>GET</strong>：数据拼接在URL后(?key=value)、有大小限制、可收藏缓存</li>
+  <li><strong>POST</strong>：数据在请求体中、理论上无限制、较安全</li>
+  <li><strong>radio</strong>：同name互斥；<strong>checkbox</strong>：同name组提交或多name分别提交</li>
+  <li><code>&lt;label for="id"&gt;</code>：为input添加可点击标签</li>
+</ul>
+
+<hr>
+
+<!-- ==================== 二、CSS ==================== -->
+<h2 id="s2">二、CSS（层叠样式表）</h2>
+
+<h3>1. CSS概念</h3>
+<ul>
+  <li>CSS（Cascading Style Sheets）：层叠样式表/级联样式表</li>
+  <li>不是编程语言，是<strong>样式语言</strong>；文件后缀<code>.css</code></li>
+  <li>作用：改变浏览器默认风格、内容与样式分离、同一内容不同样式</li>
+</ul>
+
+<h3>2. CSS基本语法</h3>
+<pre><code>选择器 {
+    属性: 值;
+    属性: 值;
+}</code></pre>
+<ul>
+  <li>选择器+一条或多条声明组成；每条声明以<strong>分号</strong>结尾</li>
+  <li>CSS注释：<code>/* 注释内容 */</code></li>
+</ul>
+
+<h3>3. CSS引入方式（三种）⭐</h3>
+<table>
+  <tr><th>引入方式</th><th>写法</th><th>优先级</th><th>使用频率</th></tr>
+  <tr><td>行内样式</td><td><code>&lt;h1 style="color:red"&gt;</code></td><td>最高</td><td>较少</td></tr>
+  <tr><td>内部样式表</td><td><code>&lt;style&gt;h1{color:red}&lt;/style&gt;</code></td><td>中</td><td>较高</td></tr>
+  <tr><td>外部样式表</td><td><code>&lt;link rel="stylesheet" href="xxx.css"&gt;</code></td><td>中</td><td>最高</td></tr>
+</table>
+<ul>
+  <li><code>&lt;link&gt;</code>只需rel和href属性，无需type属性</li>
+  <li>不推荐@import（无法并行下载，增加加载时间）</li>
+</ul>
+
+<h3>4. CSS冲突处理 ⭐</h3>
+<ul>
+  <li>优先级：<strong>行内样式 &gt; 内部样式表 = 外部样式表</strong></li>
+  <li>同优先级：<strong>后定义的样式生效</strong>（类似穿衣服，最后穿的别人能看到）</li>
+  <li><code>!important</code>可强制提升优先级（不推荐滥用）</li>
+</ul>
+
+<h3>5. 选择器权重（Specificity）⭐</h3>
+<table>
+  <tr><th>选择器</th><th>语法</th><th>权重</th><th>说明</th></tr>
+  <tr><td>通配符选择器</td><td><code>*{}</code></td><td>0</td><td>选取所有元素</td></tr>
+  <tr><td>元素选择器</td><td><code>p{}</code></td><td>1</td><td>根据标签名</td></tr>
+  <tr><td>类选择器</td><td><code>.red{}</code></td><td>10</td><td>.开头，类名不能数字开头</td></tr>
+  <tr><td>ID选择器</td><td><code>#para1{}</code></td><td>100</td><td>#开头，id页面唯一</td></tr>
+  <tr><td>内联样式</td><td><code>style=""</code></td><td>1000</td><td>直接在标签上</td></tr>
+</table>
+<p><strong>优先级顺序：行内样式 &gt; ID选择器 &gt; 类选择器 &gt; 元素选择器 &gt; 通配符选择器</strong></p>
+<p>巧记：越精准的设置优先级越高。</p>
+
+<h3>6. 组合选择器</h3>
+<table>
+  <tr><th>选择器</th><th>符号</th><th>示例</th><th>说明</th></tr>
+  <tr><td>后代选择器</td><td>空格</td><td><code>div p</code></td><td>div内所有p（任意层级）</td></tr>
+  <tr><td>子选择器</td><td><code>&gt;</code></td><td><code>div&gt;p</code></td><td>div直接子元素p</td></tr>
+  <tr><td>接续兄弟选择器</td><td><code>+</code></td><td><code>div+p</code></td><td>div后紧邻的第一个同级p</td></tr>
+  <tr><td>后续兄弟选择器</td><td><code>~</code></td><td><code>div~p</code></td><td>div后所有同级p</td></tr>
+</table>
+
+<h3>7. 伪类选择器 ⭐</h3>
+<p><strong>锚伪类（必须按LVHA顺序！）</strong></p>
+<pre><code>a:link    { color: black; }   /* L - 未访问链接 */
+a:visited { color: green; }   /* V - 已访问链接 */
+a:hover   { color: red; }     /* H - 鼠标悬停 */
+a:active  { color: blue; }    /* A - 点击激活 */</code></pre>
+<ul>
+  <li>其他伪类：<code>:first-child</code>、<code>:last-child</code>、<code>:nth-child(n)</code>、<code>:focus</code>、<code>:checked</code></li>
+</ul>
+
+<h3>8. 伪元素选择器</h3>
+<ul>
+  <li><code>::before</code>：元素之前插入内容（<strong>必须设content属性</strong>）</li>
+  <li><code>::after</code>：元素之后插入内容</li>
+  <li><code>::first-letter</code>：首字母</li>
+  <li><code>::first-line</code>：首行</li>
+  <li><code>::selection</code>：用户选中的部分</li>
+</ul>
+<p><strong>伪类 vs 伪元素</strong>：伪类用<code>:</code>修饰已有元素状态；伪元素用<code>::</code>创建虚拟元素（CSS3以前用<code>:</code>）</p>
+
+<h3>9. 属性选择器</h3>
+<ul>
+  <li><code>a[title]</code>：有title属性的a元素</li>
+  <li><code>a[href="https://example.org"]</code>：href精确匹配的a元素</li>
+</ul>
+
+<h3>10. 盒子模型（Box Model）⭐</h3>
+<p>从外到内：<strong>margin（外边距）→ border（边框）→ padding（内边距）→ content（内容）</strong></p>
+<ul>
+  <li><code>padding</code>：1~4个值（上、右、下、左，顺时针）；不接受负值</li>
+  <li><code>margin</code>：1、2、4个值；<code>margin: auto</code>可水平居中</li>
+  <li><code>border</code>：<code>border: 宽度 样式 颜色</code>，如<code>border: 5px solid red</code></li>
+</ul>
+
+<h3>11. 文档流</h3>
+<ul>
+  <li>标准流：块元素自上而下，行内元素从左到右</li>
+  <li><code>display: block</code>：块级盒子，前后换行</li>
+  <li><code>display: inline</code>：行级盒子，不换行</li>
+  <li>脱离文档流三种方式：<strong>浮动、绝对定位、固定定位</strong></li>
+</ul>
+
+<h3>12. 浮动布局（Float）</h3>
+<ul>
+  <li><code>float: left | right | none</code></li>
+  <li>浮动是<strong>相对于父元素</strong>移动</li>
+  <li><strong>浮动坍塌</strong>：父容器内所有子元素浮动后，父容器高度变为0</li>
+  <li>解决：给父容器设置<code>overflow: hidden</code>或使用clearfix</li>
+</ul>
+
+<h3>13. 弹性盒子（Flex Box）⭐</h3>
+<pre><code>display: flex;
+flex-direction: row | column | row-reverse | column-reverse;
+justify-content: center | flex-start | flex-end | space-between | space-around;
+align-items: center | stretch | flex-start | flex-end;</code></pre>
+<p><strong>上下左右居中：</strong><code>{ justify-content: center; align-items: center; }</code></p>
+<p>Flex是一维布局（一行或一列），二维布局用Grid。</p>
+
+<h3>14. 元素定位（Position）</h3>
+<table>
+  <tr><th>值</th><th>说明</th><th>是否脱离文档流</th></tr>
+  <tr><td>static</td><td>默认值，标准流</td><td>否</td></tr>
+  <tr><td>relative</td><td>相对自身原始位置偏移</td><td>否（占据原位置）</td></tr>
+  <tr><td>absolute</td><td>相对最近已定位祖先定位</td><td>是</td></tr>
+  <tr><td>fixed</td><td>相对浏览器窗口定位</td><td>是</td></tr>
+  <tr><td>sticky</td><td>滚动到指定位置变为fixed</td><td>混合</td></tr>
+</table>
+
+<h3>15. CSS3 新特性</h3>
+<ul>
+  <li><strong>圆角</strong>：<code>border-radius: 20px;</code>（≥50%产生圆形）</li>
+  <li><strong>阴影</strong>：<code>box-shadow: h v blur spread color;</code></li>
+  <li><strong>渐变</strong>：<code>linear-gradient(方向, 颜色1, 颜色2)</code></li>
+  <li><strong>变形</strong>：<code>translate(x,y)</code>、<code>rotate(deg)</code>、<code>scale(x,y)</code></li>
+  <li><strong>过渡</strong>：<code>transition: property duration timing-function delay;</code></li>
+  <li><strong>动画</strong>：<code>@keyframes name { from{} to{} }</code> + <code>animation</code>属性</li>
+</ul>
+
+<hr>
+
+<!-- ==================== 三、JavaScript ==================== -->
+<h2 id="s3">三、JavaScript</h2>
+
+<h3>1. JavaScript概述</h3>
+<ul>
+  <li>JavaScript = <strong>ECMAScript</strong>（语法核心）+ <strong>DOM</strong>（文档对象模型）+ <strong>BOM</strong>（浏览器对象模型）</li>
+  <li>1995年Brendan Eich发明，1997年成为ECMA标准</li>
+  <li><strong>ES6（ECMAScript 2015）</strong>是最主流版本</li>
+  <li>JS是<strong>弱类型语言</strong>，声明时不需要指定数据类型</li>
+</ul>
+
+<h3>2. JS引入方式（三种）⭐</h3>
+<table>
+  <tr><th>引入方式</th><th>写法</th><th>说明</th></tr>
+  <tr><td>内联脚本</td><td><code>&lt;button onclick="alert('Hello')"&gt;</code></td><td>标签属性中，违反内容行为分离</td></tr>
+  <tr><td>内部脚本</td><td><code>&lt;script&gt;alert('Hello')&lt;/script&gt;</code></td><td>HTML中，一般放在body底部</td></tr>
+  <tr><td>外部脚本</td><td><code>&lt;script src="demo.js"&gt;&lt;/script&gt;</code></td><td>⭐标签不能自闭合</td></tr>
+</table>
+
+<h3>3. JS书写语法</h3>
+<ul>
+  <li>区分大小写；分号可有可无（但多条同行必须分号）</li>
+  <li>注释：<code>//</code>单行、<code>/* */</code>多行；大括号表示代码块</li>
+  <li>输出：<code>console.log()</code>⭐（控制台）、<code>window.alert()</code>（警告框）、<code>document.write()</code>（写入HTML）</li>
+</ul>
+
+<h3>4. 变量声明 ⭐</h3>
+<table>
+  <tr><th>关键字</th><th>作用域</th><th>重复声明</th><th>说明</th></tr>
+  <tr><td><code>var</code></td><td>全局/函数</td><td>允许</td><td>旧式声明，允许不赋初值</td></tr>
+  <tr><td><code>let</code></td><td>块级</td><td>不允许</td><td>ES6新增，⭐官方推荐</td></tr>
+  <tr><td><code>const</code></td><td>块级</td><td>不允许</td><td>声明常量，必须显式赋值</td></tr>
+</table>
+
+<h3>5. 基本数据类型（5种）⭐</h3>
+<table>
+  <tr><th>类型</th><th>说明</th><th>示例</th></tr>
+  <tr><td>number</td><td>64位双精度浮点（无单独整数类型）</td><td><code>42, 3.14, NaN, Infinity</code></td></tr>
+  <tr><td>string</td><td>UTF-16字符串</td><td><code>"hello", 'world', `template`</code></td></tr>
+  <tr><td>boolean</td><td>布尔值</td><td><code>true, false</code></td></tr>
+  <tr><td>undefined</td><td>声明未赋值</td><td><code>let x; → undefined</code></td></tr>
+  <tr><td>null</td><td>空值（空对象引用）</td><td><code>let y = null;</code></td></tr>
+</table>
+<ul>
+  <li><code>typeof null</code> → <code>"object"</code>（JS历史遗留错误）</li>
+  <li><code>typeof NaN</code> → <code>"number"</code></li>
+  <li><code>NaN === NaN</code> → <strong>false</strong>，用<code>Number.isNaN()</code>判断</li>
+</ul>
+
+<h3>6. 模板字符串（ES6）</h3>
+<pre><code>const name = 'Tom', age = 30;
+const msg = `My name is ${name} and I'm ${age} years old.`;</code></pre>
+<ul>
+  <li>用反引号<code>`</code>分隔，支持多行和嵌入表达式</li>
+</ul>
+
+<h3>7. == vs === ⭐</h3>
+<table>
+  <tr><th>运算符</th><th>名称</th><th>规则</th><th>示例</th></tr>
+  <tr><td><code>==</code></td><td>宽松相等</td><td>先隐式转换再比较值</td><td><code>"5" == 5</code> → true</td></tr>
+  <tr><td><code>===</code></td><td>⭐严格相等</td><td>不转换类型，类型和值必须全相同</td><td><code>"5" === 5</code> → false</td></tr>
+</table>
+<ul>
+  <li><code>undefined == null</code> → <strong>true</strong></li>
+  <li><code>undefined === null</code> → <strong>false</strong></li>
+</ul>
+
+<h3>8. + 运算符特殊规则</h3>
+<ul>
+  <li>数值+字符串：<strong>能加则加，不能加则拼</strong></li>
+  <li><code>9 + 1 + "hnucm"</code> → <code>"10hnucm"</code>（先加后拼）</li>
+  <li><code>"hnucm" + 9 + 1</code> → <code>"hnucm91"</code>（全是字符串）</li>
+</ul>
+
+<h3>9. 类型转换 ⭐</h3>
+<p><strong>转数字：</strong></p>
+<ul>
+  <li><code>Number("")</code>→0；非纯数字→NaN；<code>" "</code>→0</li>
+  <li><code>parseInt("12.1")</code>→12；遇非数字停止；<code>parseInt("")</code>→NaN</li>
+  <li><code>parseFloat("12.34.0")</code>→12.34</li>
+</ul>
+<p><strong>转Boolean（false的情况）：</strong><code>0</code>、<code>""</code>、<code>null</code>、<code>undefined</code>、<code>NaN</code></p>
+<p>其他所有值（包括<code>"0"</code>、<code>[]</code>、<code>{}</code>）都是true。</p>
+
+<h3>10. 函数 ⭐</h3>
+<pre><code>// 方式一：函数声明
+function add(a, b) { return a + b; }
+
+// 方式二：函数表达式
+const add = function (a, b) { return a + b; };
+
+// ⭐方式三：箭头函数（ES6）
+const add = (a, b) => a + b;    // 单表达式省略{}和return
+const square = n => n * n;      // 单参数省略()</code></pre>
+<ul>
+  <li>参数不需要类型；返回值不需要定义类型</li>
+  <li>调用时可传任意个数参数（多传忽略、少传为undefined）</li>
+  <li>没有return的函数返回undefined</li>
+</ul>
+
+<h3>11. Array数组 ⭐</h3>
+<pre><code>const arr = [1, 2, 3, 4];             // ⭐推荐
+const arr = new Array(1, 2, 3, 4);    // 方式二</code></pre>
+<ul>
+  <li><strong>JS数组特点：长度可变、类型可变</strong></li>
+  <li><code>arr[10] = "hello"</code>：长度变为11，索引4-9为empty（访问为undefined）</li>
+</ul>
+<p><strong>常用方法：</strong></p>
+<ul>
+  <li>增删原数组：<code>push、pop、shift、unshift、splice</code></li>
+  <li>截取拼接（不改变原数组）：<code>slice、concat</code></li>
+  <li>排序反转：<code>sort、reverse</code></li>
+  <li>判断包含：<code>includes、indexOf、lastIndexOf</code></li>
+  <li>合并字符串：<code>join</code></li>
+</ul>
+<p><strong>遍历：</strong>for循环、<code>for...of</code>（ES6）、<code>forEach</code>（不可break/return中断）</p>
+
+<h3>12. Math & Date</h3>
+<ul>
+  <li><code>Math.random()</code>：[0, 1)随机数</li>
+  <li><code>Math.floor/ceil/round/trunc</code>：取整</li>
+  <li>生成[min, max)随机数：<code>Math.random() * (max - min) + min</code></li>
+  <li><code>Date.now()</code>：1970-01-01至今毫秒数（时间戳）</li>
+</ul>
+
+<h3>13. 自定义对象</h3>
+<pre><code>const user = {
+    firstName: "Jonny",
+    age: 38,
+    hello() { console.log(`Hi, I'm ${this.firstName}`); }
+};
+// 访问属性：user.firstName 或 user["firstName"]
+// 调用方法：user.hello()</code></pre>
+
+<h3>14. JSON ⭐</h3>
+<ul>
+  <li>属性名和字符串值<strong>必须用双引号</strong></li>
+  <li>结尾不能多逗号</li>
+  <li><code>JSON.parse(jsonStr)</code>：JSON字符串 → JS对象</li>
+  <li><code>JSON.stringify(obj)</code>：JS对象 → JSON字符串</li>
+  <li>遍历：<code>for...in</code></li>
+</ul>
+
+<h3>15. DOM（文档对象模型）⭐</h3>
+<p><strong>概念：</strong>将HTML各组成部分封装为对象</p>
+<ul>
+  <li>Document（整个文档）、<strong>Element（元素）、Attribute（属性）、Text（文本）</strong>、Comment（注释）</li>
+  <li>浏览器解析HTML为DOM树状结构（DOM Tree）</li>
+</ul>
+
+<h4>DOM获取元素 ⭐</h4>
+<table>
+  <tr><th>方法</th><th>返回值</th></tr>
+  <tr><td><code>document.getElementById("id")</code></td><td>单个Element对象</td></tr>
+  <tr><td><code>document.getElementsByClassName("class")</code></td><td>Element对象集合</td></tr>
+  <tr><td><code>document.getElementsByTagName("p")</code></td><td>Element对象集合</td></tr>
+  <tr><td><code>document.getElementsByName("name")</code></td><td>Element对象集合</td></tr>
+  <tr><td><code>document.querySelector(".text")</code></td><td>第一个匹配Element</td></tr>
+  <tr><td><code>document.querySelectorAll(".text")</code></td><td>所有匹配Element</td></tr>
+</table>
+
+<h4>DOM操作属性</h4>
+<pre><code>// 获取属性
+el.getAttribute("value");   // 方式一：通用，返回HTML源码层面
+el.value;                    // 方式二：JS层面，性能更高（class→className）
+
+// 设置属性
+el.setAttribute("id", "username");  // 方式一
+el.id = "username";                  // 方式二
+
+// 检查/删除
+el.hasAttribute("disabled");
+el.removeAttribute("style");</code></pre>
+
+<h4>DOM操作文本 ⭐</h4>
+<ul>
+  <li><code>element.innerHTML</code>：读取/写入HTML内容，<strong>会解析标签</strong></li>
+  <li><code>element.innerText</code>：读取/写入纯文本，<strong>不解析标签</strong></li>
+</ul>
+
+<h4>DOM修改样式</h4>
+<pre><code>// 方式一：setAttribute
+box.setAttribute("style", "width:200px;height:200px;background:red;");
+// 方式二：style属性
+divStyle.width = "200px"; divStyle.backgroundColor = "red";
+// 方式三：cssText
+divStyle.cssText = "width:200px;height:200px;background:red;";</code></pre>
+
+<h3>16. DOM事件 ⭐</h3>
+<p><strong>事件绑定三种方式：</strong></p>
+<table>
+  <tr><th>方式</th><th>语法</th><th>优点</th><th>缺点</th></tr>
+  <tr><td>HTML事件</td><td><code>&lt;button onclick="fn()"&gt;</code></td><td>简单</td><td>结构行为不分离</td></tr>
+  <tr><td>DOM0</td><td><code>el.onclick = () => {}</code></td><td>HTML/JS分离</td><td>无法多事件</td></tr>
+  <tr><td>DOM2</td><td><code>el.addEventListener("click", fn)</code></td><td>⭐可添加多个</td><td>稍繁琐</td></tr>
+</table>
+<p>移除：<code>removeEventListener("click", fn)</code></p>
+
+<h3>17. BOM（浏览器对象模型）</h3>
+<ul>
+  <li><strong>Window</strong>：浏览器窗口（全局变量/函数都是其成员，<code>window.</code>可省略）</li>
+  <li><strong>Location</strong>：<code>hostname</code>、<code>pathname</code>、<code>port</code>、<code>protocol</code></li>
+  <li><strong>History</strong>：<code>back()</code>、<code>forward()</code></li>
+  <li><strong>Navigator</strong>：<code>userAgent</code>、<code>cookieEnabled</code></li>
+</ul>
+
+<h4>定时器 ⭐</h4>
+<table>
+  <tr><th>特性</th><th>setTimeout</th><th>setInterval</th></tr>
+  <tr><td>执行</td><td>一次</td><td>循环</td></tr>
+  <tr><td>内存溢出</td><td>不会</td><td>可能</td></tr>
+  <tr><td>适用</td><td>延迟执行、页面加载后</td><td>周期性执行（定时刷新动画）</td></tr>
+</table>
+
+<hr>
+
+<!-- ==================== 四、Servlet ==================== -->
+<h2 id="s4">四、Servlet</h2>
+
+<h3>1. 同步 vs 异步</h3>
+<ul>
+  <li><strong>同步</strong>：顺序执行，阻塞式 → 页面卡死、不能渲染</li>
+  <li><strong>异步</strong>：彼此独立，非阻塞 → 界面响应流畅</li>
+</ul>
+
+<h3>2. 异步通信技术</h3>
+<ul>
+  <li><strong>Fetch API</strong>（2015）：浏览器原生，不需引入，不够方便</li>
+  <li><strong>Axios</strong>（2016）：自动转换JSON，需手动导入js</li>
+  <li><strong>async/await</strong>：<code>async</code>放函数前变异步；<code>await</code>等待完成，只阻塞当前函数</li>
+</ul>
+<pre><code>axios({ method:"get", url:"http://localhost:8080/item/selectAll" })
+     .then(resp => { this.tableData = resp.data; });</code></pre>
+
+<h3>3. HTTP请求</h3>
+<ul>
+  <li>请求方法：<strong>GET、POST、PUT、DELETE</strong></li>
+  <li>URL格式：<code>http://localhost:8080/login</code></li>
+</ul>
+
+<h3>4. JavaWeb三大组件</h3>
+<ul>
+  <li><strong>Servlet</strong>（服务连接器）：处理客户端请求</li>
+  <li><strong>Filter</strong>（过滤器）：请求到达前拦截</li>
+  <li><strong>Listener</strong>（监听器）：监听Web事件</li>
+</ul>
+
+<h3>5. Servlet概念</h3>
+<ul>
+  <li>Servlet是JavaEE规范之一，本质上是一个<strong>接口</strong></li>
+  <li>Servlet由<strong>Web服务器（Tomcat）创建和调用</strong></li>
+</ul>
+
+<h3>6. Servlet接口方法</h3>
+<ul>
+  <li><code>void init(ServletConfig config)</code>：初始化，<strong>只执行一次</strong></li>
+  <li><code>void service(ServletRequest req, ServletResponse resp)</code>：处理请求，<strong>每次访问调用</strong></li>
+  <li><code>void destroy()</code>：销毁，释放资源时调用</li>
+</ul>
+
+<h3>7. Servlet生命周期（4个阶段）⭐</h3>
+<table>
+  <tr><th>阶段</th><th>说明</th><th>执行次数</th></tr>
+  <tr><td>1. 加载和实例化</td><td>默认第一次访问时创建（loadOnStartup=-1）；0或正整数→服务器启动时创建</td><td>—</td></tr>
+  <tr><td>2. 初始化 init()</td><td>加载配置、创建连接等初始化工作</td><td>一次</td></tr>
+  <tr><td>3. 请求处理 service()</td><td>每次请求Servlet时调用</td><td>多次</td></tr>
+  <tr><td>4. 服务终止 destroy()</td><td>释放内存或容器关闭时调用</td><td>一次</td></tr>
+</table>
+
+<h3>8. HttpServlet ⭐</h3>
+<ul>
+  <li>继承层次：<strong>Servlet接口 → GenericServlet抽象类 → HttpServlet</strong></li>
+  <li><strong>使用步骤</strong>：① 继承HttpServlet ② 重写doGet和doPost</li>
+  <li><strong>原理</strong>：获取请求方式，根据请求方式调用不同doXxx方法</li>
+  <li>GET请求参数在<strong>请求行</strong>中，POST请求参数在<strong>请求体</strong>中</li>
+</ul>
+<pre><code>@WebServlet("/demo1")
+public class MyServlet extends HttpServlet {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) { }
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) { }
+}</code></pre>
+
+<h3>9. Servlet urlPattern配置 ⭐</h3>
+<table>
+  <tr><th>匹配模式</th><th>配置示例</th><th>说明</th></tr>
+  <tr><td>精确匹配</td><td><code>@WebServlet("/user/select")</code></td><td>精确路径</td></tr>
+  <tr><td>目录匹配</td><td><code>@WebServlet("/user/*")</code></td><td>匹配/user/下所有</td></tr>
+  <tr><td>扩展名匹配</td><td><code>@WebServlet("*.html")</code></td><td>注意开头无"/"</td></tr>
+  <tr><td>任意匹配</td><td><code>@WebServlet("/")</code> 或 <code>/*</code></td><td>兜底；/不匹配带扩展名</td></tr>
+</table>
+<p><strong>优先级：精确匹配 &gt; 目录匹配 &gt; /* &gt; 扩展名匹配 &gt; /</strong></p>
+
+<hr>
+
+<!-- ==================== 五、会话跟踪 ==================== -->
+<h2 id="s5">五、会话跟踪</h2>
+
+<h3>1. 会话概念</h3>
+<ul>
+  <li>HTTP是<strong>无状态协议</strong>，每个请求独立</li>
+  <li><strong>会话跟踪</strong>：维护浏览器状态，识别同一浏览器多次请求，在多次请求间共享数据</li>
+  <li>使用场景：登录"记住我"功能</li>
+</ul>
+
+<h3>2. 会话跟踪技术</h3>
+<table>
+  <tr><th>技术</th><th>存储位置</th><th>容量</th><th>适用场景</th></tr>
+  <tr><td><strong>Cookie</strong></td><td>客户端</td><td>4KB</td><td>通用会话跟踪</td></tr>
+  <tr><td><strong>HttpSession</strong></td><td>服务端</td><td>取决于服务器</td><td>Java Web应用</td></tr>
+  <tr><td>JWT (Token)</td><td>客户端</td><td>—</td><td>用户身份验证</td></tr>
+</table>
+
+<h3>3. Cookie ⭐</h3>
+<p><strong>运行机制：</strong>服务器创建Cookie→响应发送→浏览器存储→后续请求自动携带→服务器读取</p>
+<pre><code>// 发送Cookie
+Cookie cookie = new Cookie("username", "maxxie");
+response.addCookie(cookie);
+
+// 获取Cookie
+Cookie[] cookies = request.getCookies();
+for (Cookie c : cookies) {
+    String name = c.getName();
+    String value = c.getValue();
+}</code></pre>
+<p><strong>setMaxAge：</strong></p>
+<ul>
+  <li><strong>正数</strong>：持久化到硬盘，到期自动删除</li>
+  <li><strong>负数</strong>（默认）：浏览器内存，关闭即销毁</li>
+  <li><strong>零</strong>：删除对应Cookie</li>
+</ul>
+<p><strong>缺点：</strong>安全风险、大小限制(4KB)、明文传输、用户可拒绝</p>
+
+<h3>4. Session ⭐（基于Cookie实现）</h3>
+<p><strong>运行机制：</strong>服务器创建Session（唯一标识JSESSIONID）→以Cookie形式响应→浏览器存储→后续请求携带JSESSIONID→服务器查找Session</p>
+<pre><code>// 存储
+HttpSession session = request.getSession();
+session.setAttribute("username", "maxxie");
+
+// 获取（false防止创建新session）
+HttpSession session = request.getSession(false);
+Object username = session.getAttribute("username");</code></pre>
+<ul>
+  <li>默认<strong>30分钟</strong>无操作自动销毁</li>
+  <li><code>session.setMaxInactiveInterval(60);</code>：自定义失效时间</li>
+  <li><code>session.invalidate();</code>：手动销毁（用户退出时使用）</li>
+  <li><strong>钝化</strong>：服务器正常关闭时写入硬盘</li>
+  <li><strong>活化</strong>：再次启动时加载到Session</li>
+</ul>
+
+<h3>5. Cookie vs Session对比 ⭐</h3>
+<table>
+  <tr><th>特性</th><th>Cookie</th><th>Session</th></tr>
+  <tr><td>存储位置</td><td>客户端</td><td>服务器端</td></tr>
+  <tr><td>存储类型</td><td>字符串</td><td>对象</td></tr>
+  <tr><td>安全性</td><td>较低（易被篡改/读取）</td><td>较高（仅Session ID）</td></tr>
+  <tr><td>数据大小</td><td>单个不超过4KB</td><td>理论上无限制</td></tr>
+  <tr><td>过期</td><td>可设，关浏览器仍可存在</td><td>关浏览器通常结束</td></tr>
+</table>
+
+<hr>
+
+<!-- ==================== 六、Filter & 转发重定向 ==================== -->
+<h2 id="s6">六、Filter过滤器 &amp; 请求转发与重定向</h2>
+
+<h3>1. Filter（过滤器）⭐</h3>
+<ul>
+  <li><strong>作用</strong>：拦截请求，完成通用操作</li>
+  <li><strong>应用场景</strong>：登录验证、跨域处理、统一编码、敏感字符过滤</li>
+  <li>可拦截：Servlet请求、静态资源（HTML/CSS/JS）、图片等</li>
+</ul>
+<p><strong>实现步骤：</strong>① 定义类实现Filter接口 ② 重写init/doFilter/destroy ③ 配置拦截路径</p>
+<p><strong>生命周期：</strong><code>init</code>（一次）→ <code>doFilter</code>（多次）→ <code>destroy</code>（一次）</p>
+
+<h3>2. 请求转发（forward）</h3>
+<ul>
+  <li><strong>服务器内部</strong>的资源跳转，对客户端透明</li>
+  <li>特征：<strong>1次请求</strong>、URL<strong>不变</strong>、<strong>共享request数据</strong>、仅限当前应用内</li>
+  <li>实现：<code>request.getRequestDispatcher("/path").forward(request, response)</code></li>
+</ul>
+
+<h3>3. 重定向（redirect）</h3>
+<ul>
+  <li>通知<strong>客户端</strong>去访问另一个资源（302+location）</li>
+  <li>特征：<strong>2次请求</strong>、URL<strong>改变</strong>、<strong>不共享</strong>request数据、可任意URL</li>
+  <li>实现：<code>response.sendRedirect("/path")</code></li>
+</ul>
+
+<h3>4. 转发 vs 重定向 ⭐</h3>
+<table>
+  <tr><th>特性</th><th>转发（forward）</th><th>重定向（redirect）</th></tr>
+  <tr><td>请求次数</td><td><strong>1次</strong></td><td><strong>2次</strong></td></tr>
+  <tr><td>URL变化</td><td>不变</td><td>改变</td></tr>
+  <tr><td>数据共享</td><td>共享request</td><td>不共享</td></tr>
+  <tr><td>目标限制</td><td>仅当前应用内</td><td>任意URL</td></tr>
+</table>
+
+<h3>5. 场景选择判断 ⭐</h3>
+<ul>
+  <li>需要共享request数据 → <strong>转发</strong></li>
+  <li>跳转到外部网站 → <strong>重定向</strong></li>
+  <li>避免表单重复提交 → <strong>重定向</strong></li>
+  <li>不希望用户看到实际URL → <strong>转发</strong></li>
+  <li>需要改变地址栏URL → <strong>重定向</strong></li>
+</ul>
+
+<hr>
+
+<!-- ==================== 七、JSP ==================== -->
+<h2 id="s7">七、JSP（Java Server Pages）</h2>
+
+<h3>1. JSP概念</h3>
+<ul>
+  <li>JSP = HTML + Java，动态网页技术</li>
+  <li><strong>JSP本质上就是一个Servlet</strong>（JSP→转换→.java文件→编译→.class文件）</li>
+  <li>自动生成的Java文件继承HttpJspBase→继承HttpServlet</li>
+</ul>
+
+<h3>2. JSP基本语法 ⭐</h3>
+<table>
+  <tr><th>元素</th><th>语法</th><th>位置</th><th>用途</th></tr>
+  <tr><td>注释</td><td><code>&lt;%-- --%&gt;</code></td><td>任意</td><td>服务器端，不发送客户端（与HTML注释&lt;!-- --&gt;不同）</td></tr>
+  <tr><td>脚本段</td><td><code>&lt;% %&gt;</code></td><td>_jspService()内</td><td>嵌入Java逻辑代码</td></tr>
+  <tr><td>表达式</td><td><code>&lt;%= %&gt;</code></td><td>out.print()参数</td><td>⭐输出（不能有分号！）</td></tr>
+  <tr><td>声明</td><td><code>&lt;%! %&gt;</code></td><td>类成员位置</td><td>成员变量/方法（多请求共享）</td></tr>
+</table>
+<p><strong>关键区别：</strong>声明中变量是成员变量（多请求共享），脚本段中变量是局部变量（仅当前请求有效）</p>
+<p><code>out</code>（JspWriter）→ 客户端浏览器；<code>System.out</code> → 控制台</p>
+
+<h3>3. JSP指令标记</h3>
+<pre><code>&lt;%@ page contentType="text/html;charset=UTF-8" %&gt;  &lt;!-- 处理乱码 -->
+&lt;%@ page import="java.util.Date" %&gt;                  &lt;!-- 导入类 -->
+&lt;%@ page session="true" %&gt;                           &lt;!-- 启用session -->
+&lt;%@ include file="header.jsp" %&gt;                      &lt;!-- 静态包含 --></code></pre>
+
+<h3>4. JSP动作标记</h3>
+<pre><code>&lt;jsp:useBean id="MyBox" class="edu.hnucm.Box" scope="page" /&gt;
+&lt;jsp:getProperty name="MyBox" property="length" /&gt;
+&lt;jsp:setProperty name="MyBox" property="length" value="10" /&gt;
+&lt;jsp:include page="header.jsp" /&gt;  &lt;!-- 动态包含 --></code></pre>
+<p><strong>Scope取值：</strong><code>page</code>（当前页）→ <code>request</code>（请求期间）→ <code>session</code>（会话期间）→ <code>application</code>（整个应用生存期）</p>
+
+<h3>5. 静态包含 vs 动态包含 ⭐</h3>
+<table>
+  <tr><th>特性</th><th>&lt;%@ include %&gt;（静态）</th><th>&lt;jsp:include&gt;（动态）</th></tr>
+  <tr><td>处理时机</td><td>编译时</td><td>运行时（每次请求）</td></tr>
+  <tr><td>效率</td><td>高（只编译一次）</td><td>稍低</td></tr>
+  <tr><td>变量作用域</td><td>共享</td><td>独立</td></tr>
+  <tr><td>修改反映</td><td>需重新编译主文件</td><td>立即反映</td></tr>
+</table>
+
+<h3>6. EL表达式</h3>
+<ul>
+  <li><code>${MyBox.length}</code> 替代 <code>&lt;jsp:getProperty name="MyBox" property="length"/&gt;</code></li>
+  <li>不能直接赋值，赋值仍用setProperty</li>
+</ul>
+
+<h3>7. JSP优缺点</h3>
+<ul>
+  <li><strong>优点</strong>：与Java生态集成、简化HTML输出、组件化</li>
+  <li><strong>缺点</strong>：前后端耦合严重、混杂交错、难维护</li>
+  <li>现代替代：Thymeleaf（Spring推荐）、前后端分离（Spring Boot + Vue/React）</li>
+</ul>
+
+<hr>
+
+<!-- ==================== 八、Vue ==================== -->
+<h2 id="s8">八、简单的Vue（前端框架）</h2>
+
+<h3>1. Vue概述</h3>
+<ul>
+  <li>Vue.js用于实现<strong>响应式数据绑定</strong>和<strong>组件化视图</strong></li>
+  <li>配合<strong>Element Plus</strong>（UI组件库）和<strong>Axios</strong>（HTTP请求）使用</li>
+  <li>Element Plus：<a href="https://element-plus.org/zh-CN/">https://element-plus.org/zh-CN/</a></li>
+</ul>
+
+<h3>2. 核心示例</h3>
+<pre><code>&lt;el-table-column prop="brandName" label="品牌名称"&gt;
+&lt;el-table-column prop="companyName" label="企业名称"&gt;
+
+&lt;script&gt;
+selectAll() {
+    axios({
+        method: "get",
+        url: "http://localhost:8080/item/selectAll"
+    }).then(resp =&gt; {
+        this.tableData = resp.data;
+    })
+}
+&lt;/script&gt;</code></pre>
+
+<h3>3. Vue核心概念</h3>
+<ul>
+  <li>数据绑定（<code>{{ }}</code> Mustache语法）</li>
+  <li>事件处理</li>
+  <li>组件化开发（Element Plus的el-table-column等）</li>
+  <li>通过Axios与后端异步数据交互</li>
+</ul>
+
+<hr>
+
+<!-- ==================== 九、项目思维 ==================== -->
+<h2 id="s9">九、项目思维（架构与开发模式）</h2>
+
+<h3>1. C/S vs B/S架构</h3>
+<table>
+  <tr><th>架构</th><th>含义</th><th>特点</th></tr>
+  <tr><td>C/S</td><td>Client/Server（客户端/服务器）</td><td>需要安装客户端</td></tr>
+  <tr><td>B/S</td><td>Browser/Server（浏览器/服务器）</td><td>只需浏览器，易维护升级</td></tr>
+</table>
+
+<h3>2. 前后端分离开发 vs 混合开发</h3>
+<ul>
+  <li><strong>前后端分离</strong>：前端(Vue/Element Plus/Nginx) + 后端(SpringBoot/MyBatis/MySQL)</li>
+  <li><strong>混合开发</strong>：前端代码和后端在同一项目中</li>
+</ul>
+
+<h3>3. Web工作流程</h3>
+<pre><code>浏览器 → 前端服务器(前端程序) → 后端服务器(Java程序) → 数据库服务器</code></pre>
+
+<h3>4. MVC三层架构</h3>
+<ol>
+  <li>用户请求 → <strong>Controller</strong>（控制层）接收</li>
+  <li>Controller调用<strong>Model</strong>（模型层）处理</li>
+  <li>Model返回结果→Controller根据结果找相应<strong>View</strong>（视图）</li>
+  <li>View渲染数据后响应给浏览器</li>
+</ol>
+
+<h3>5. 技术栈对比</h3>
+<table>
+  <tr><th>体系</th><th>前端</th><th>后端</th><th>服务器</th></tr>
+  <tr><td>Java</td><td>HTML/CSS/JS + Vue/Element Plus</td><td>JSP/Servlet/SpringBoot</td><td>Tomcat</td></tr>
+  <tr><td>.Net</td><td>HTML/CSS/JS</td><td>Aspx/C#</td><td>IIS</td></tr>
+</table>
+
+<h3>6. 课程技术路线</h3>
+<ul>
+  <li>前端：HTML/CSS/JS → Vue、Element Plus、Nginx</li>
+  <li>后端：JSP/Servlet → Maven、SpringBoot、MySQL、MyBatis</li>
+  <li>经典框架：Struts+Spring+Hibernate / Spring MVC+Spring+MyBatis</li>
+</ul>
+
+<h3>7. 前端技术发展</h3>
+<pre><code>HTML+CSS+JS（打牢基础）→ jQuery（了解）→ Bootstrap/Vue.js（自学提升）</code></pre>
+
+<h3>8. Web技术发展四阶段</h3>
+<ol>
+  <li>纯Servlet（逻辑+页面拼接）</li>
+  <li>Servlet + JSP（JSP仍嵌套Java）</li>
+  <li>Servlet（逻辑）+ JSP（展示）→ MVC雏形</li>
+  <li>Servlet（后端）+ HTML + Vue.js → <strong>前后端分离</strong></li>
+</ol>
+
+<hr>
+
+<blockquote>
+📝 以上考点基于课堂12个PPT课件整理，覆盖HTML、CSS、JavaScript、Servlet、会话跟踪(Cookie/Session)、Filter过滤器、请求转发与重定向、JSP（基本语法、指令、动作标记、EL表达式）、简单的Vue及项目思维等全部内容。重点用⭐标注。
+</blockquote>
+
+</main>
+</div>
+
+<button class="back-top" id="backTop">↑</button>
+
+<script src="js/main.js"></script>
+</body>
+</html>
