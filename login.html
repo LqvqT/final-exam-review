@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>登录 · 江小白的期末周</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="login-page">
+
+<div class="login-card">
+  <div class="login-icon">📚</div>
+  <h2>江小白的期末周</h2>
+  <p class="login-sub">输入密码，开启复习之旅</p>
+
+  <div class="input-group">
+    <label>👤 昵称</label>
+    <input type="text" id="nickname" placeholder="请输入昵称" autocomplete="off">
+  </div>
+  <div class="input-group">
+    <label>🔒 密码</label>
+    <input type="password" id="password" placeholder="请输入密码">
+  </div>
+
+  <div class="error-msg" id="errorMsg"></div>
+
+  <button class="login-btn" id="loginBtn" onclick="doLogin()">🚀 进入复习</button>
+</div>
+
+<!-- 过渡动画层 -->
+<div class="login-overlay" id="overlay" style="display:none;">
+  <div class="spark-container" id="sparkContainer"></div>
+  <div class="welcome-text" id="welcomeText"></div>
+  <div class="loading-ring"></div>
+</div>
+
+<script>
+function doLogin() {
+  const nickname = document.getElementById('nickname').value.trim();
+  const password = document.getElementById('password').value;
+  const errorMsg = document.getElementById('errorMsg');
+  const btn = document.getElementById('loginBtn');
+
+  if (nickname !== '江小白') {
+    errorMsg.textContent = '昵称不正确哦～';
+    return;
+  }
+  if (password !== 'jxb123') {
+    errorMsg.textContent = '密码错误，再想想～';
+    return;
+  }
+
+  // 登录成功
+  errorMsg.textContent = '';
+  btn.disabled = true;
+  btn.textContent = '✓ 验证通过';
+
+  // 启动过渡动画
+  const overlay = document.getElementById('overlay');
+  const welcomeText = document.getElementById('welcomeText');
+  const sparkContainer = document.getElementById('sparkContainer');
+
+  overlay.style.display = 'flex';
+  welcomeText.textContent = '欢迎回来，江小白 ✨';
+
+  // 生成粒子
+  for (let i = 0; i < 40; i++) {
+    const spark = document.createElement('span');
+    spark.className = 'spark';
+    spark.style.left = '50%';
+    spark.style.top = '50%';
+    spark.style.setProperty('--dx', (Math.random() - 0.5) * 400 + 'px');
+    spark.style.setProperty('--dy', (Math.random() - 0.5) * 400 + 'px');
+    spark.style.animationDelay = Math.random() * 0.6 + 's';
+    spark.style.background = ['#e94560','#4a6cf7','#f59e0b','#10b981','#8b5cf6'][Math.floor(Math.random()*5)];
+    sparkContainer.appendChild(spark);
+  }
+
+  // 延迟后跳转
+  setTimeout(() => {
+    overlay.style.opacity = '0';
+    overlay.style.transition = 'opacity 0.5s';
+    setTimeout(() => {
+      sessionStorage.setItem('jxb_logged_in', 'true');
+      window.location.href = 'index.html';
+    }, 500);
+  }, 2200);
+}
+
+// 回车登录
+document.getElementById('password').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') doLogin();
+});
+document.getElementById('nickname').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') document.getElementById('password').focus();
+});
+</script>
+
+</body>
+</html>

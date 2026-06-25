@@ -2,6 +2,17 @@
  * 江小白的期末周 — 交互脚本
  */
 
+// ========== 登录检查 ==========
+if (sessionStorage.getItem('jxb_logged_in') !== 'true') {
+  if (!window.location.pathname.includes('login.html')) {
+    window.location.href = 'login.html';
+  }
+}
+function logout() {
+  sessionStorage.removeItem('jxb_logged_in');
+  window.location.href = 'login.html';
+}
+
 document.addEventListener('DOMContentLoaded', function () {
 
   // ========== 回到顶部按钮 ==========
