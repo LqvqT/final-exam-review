@@ -31,12 +31,8 @@
 <div class="cinematic-overlay" id="overlay" style="display:none;">
   <div class="starfield" id="starfield"></div>
 
-  <!-- 霸屏图片层 -->
-  <div class="hero-image-stage" id="heroStage">
-    <img id="heroImg" src="" alt="" class="hero-image">
-    <div class="hero-label" id="heroLabel"></div>
-    <div class="hero-sparkles" id="heroSparkles"></div>
-  </div>
+  <!-- 霸屏视频层 -->
+  <video class="cinema-video" id="cinemaVideo" src="img/transition.mp4" muted playsinline preload="auto"></video>
 
   <!-- 前景内容 -->
   <div class="cinematic-content">
@@ -71,13 +67,11 @@ function doLogin() {
   btn.disabled = true;
   btn.textContent = '✓ 验证通过';
 
-  // 启动全屏电影级过渡动画
+  // 启动全屏视频过渡动画
   const overlay = document.getElementById('overlay');
   const welcomeText = document.getElementById('welcomeText');
   const starfield = document.getElementById('starfield');
-  const heroImg = document.getElementById('heroImg');
-  const heroLabel = document.getElementById('heroLabel');
-  const heroSparkles = document.getElementById('heroSparkles');
+  const video = document.getElementById('cinemaVideo');
 
   overlay.style.display = 'flex';
   welcomeText.textContent = '欢迎回来，江小白 ✨';
@@ -94,80 +88,32 @@ function doLogin() {
     starfield.appendChild(star);
   }
 
-  // 8颗流星
-  for (let i = 0; i < 8; i++) {
-    const meteor = document.createElement('span');
-    meteor.className = 'shooting-star';
-    meteor.style.left = (20 + Math.random() * 60) + '%';
-    meteor.style.top = Math.random() * 40 + '%';
-    meteor.style.setProperty('--delay', (i * 0.4 + Math.random()) + 's');
-    starfield.appendChild(meteor);
-  }
-
-  // 四张图片轮流展示
-  const pool = [
-    { src: 'img/chiikawa.jpg', label: '🐣 吉伊' },
-    { src: 'img/hachiware.jpg', label: '🐱 小八' },
-    { src: 'img/usagi.jpg', label: '🐰 乌萨奇' },
-  ];
-  // 前三张随机打乱
-  for (let i = pool.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [pool[i], pool[j]] = [pool[j], pool[i]];
-  }
-  // 最后一张：三小只同框
-  const sequence = [...pool, { src: 'img/three.jpg', label: '💫 三小只集合！' }];
-
-  let imgIndex = 0;
-  const totalDuration = 5000; // 总时长5秒
-  const imgInterval = totalDuration / sequence.length; // 每张约1.25秒
-
-  function showImage(idx) {
-    if (idx >= sequence.length) return;
-    const item = sequence[idx];
-
-    // 生成光点
-    heroSparkles.innerHTML = '';
-    for (let i = 0; i < 20; i++) {
-      const dot = document.createElement('span');
-      dot.className = 'hero-dot';
-      dot.style.left = Math.random() * 100 + '%';
-      dot.style.top = Math.random() * 100 + '%';
-      dot.style.animationDelay = Math.random() * 0.5 + 's';
-      heroSparkles.appendChild(dot);
-    }
-
-    heroImg.classList.remove('hero-in');
-    void heroImg.offsetWidth;
-    heroImg.src = item.src;
-    heroImg.alt = item.label;
-    heroLabel.textContent = item.label;
-    heroImg.classList.add('hero-in');
-
-    // 最后一张特殊效果
-    if (idx === sequence.length - 1) {
-      heroImg.style.animation = 'heroZoomFinal 2s ease-out forwards';
-      heroLabel.style.fontSize = '1.4em';
-      heroLabel.style.color = '#fde68a';
-    }
-
-    imgIndex++;
-    if (imgIndex < sequence.length) {
-      setTimeout(() => showImage(imgIndex), imgInterval);
-    }
-  }
-
-  // 0.5秒后开始展示
-  setTimeout(() => showImage(0), 500);
-
-  // 总时长后淡出跳转
-  setTimeout(() => {
+  // 视频播完跳转
+  video.addEventListener('ended', function() {
     overlay.classList.add('fadeout');
     setTimeout(() => {
       sessionStorage.setItem('jxb_logged_in', 'true');
       window.location.href = 'index.html';
     }, 600);
-  }, totalDuration + 600);
+  });
+
+  // 播放视频
+  video.play().catch(() => {
+    // 如果自动播放被阻止，显示播放按钮
+    video.muted = true;
+    video.play();
+  });
+
+  // 兜底：如果视频卡住超时15秒强制跳转
+  setTimeout(() => {
+    if (!sessionStorage.getItem('jxb_logged_in')) {
+      overlay.classList.add('fadeout');
+      setTimeout(() => {
+        sessionStorage.setItem('jxb_logged_in', 'true');
+        window.location.href = 'index.html';
+      }, 600);
+    }
+  }, 15000);
 }
 
 // 回车登录

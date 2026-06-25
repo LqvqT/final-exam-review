@@ -576,60 +576,14 @@ a { color: inherit; text-decoration: none; }
   100% { transform: translate(-300px, 200px); opacity: 0; }
 }
 
-/* 霸屏图片层 */
-.hero-image-stage {
+/* 全屏视频 */
+.cinema-video {
   position: absolute; inset: 0;
-  display: flex; align-items: center; justify-content: center;
+  width: 100%; height: 100%;
+  object-fit: cover;
   z-index: 0;
-  opacity: 0.25;
-}
-.hero-image {
-  max-width: 85vw; max-height: 70vh;
-  object-fit: contain;
-  border-radius: 24px;
-  opacity: 0;
-  transform: scale(0.5);
-  transition: opacity 0.6s ease-out, transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  box-shadow: 0 20px 80px rgba(0,0,0,0.4);
-}
-.hero-image.hero-in {
-  opacity: 1;
-  transform: scale(1);
-}
-@keyframes heroZoomFinal {
-  0% { transform: scale(0.8); opacity: 0; }
-  30% { transform: scale(1.15); opacity: 1; }
-  100% { transform: scale(1); opacity: 1; }
-}
-.hero-label {
-  position: absolute; bottom: 15%;
-  left: 50%; transform: translateX(-50%);
-  color: #fff;
-  font-size: 1.1em;
-  font-weight: 700;
-  letter-spacing: 3px;
-  text-shadow: 0 0 30px rgba(0,0,0,0.6);
-  opacity: 0;
-  animation: labelPop 1s 0.3s ease-out forwards;
-}
-@keyframes labelPop {
-  from { opacity: 0; transform: translateX(-50%) translateY(10px); }
-  to { opacity: 1; transform: translateX(-50%) translateY(0); }
-}
-
-/* 光点 */
-.hero-sparkles { position: absolute; inset: 0; pointer-events: none; }
-.hero-dot {
-  position: absolute;
-  width: 4px; height: 4px;
-  background: #fff;
-  border-radius: 50%;
-  animation: dotPulse 1.2s ease-in-out infinite;
-  box-shadow: 0 0 6px #fff;
-}
-@keyframes dotPulse {
-  0%,100% { opacity: 0.2; transform: scale(1); }
-  50% { opacity: 1; transform: scale(2.5); }
+  opacity: 0.5;
+  filter: brightness(0.6);
 }
 
 /* 前景居中内容 */
@@ -708,7 +662,7 @@ a { color: inherit; text-decoration: none; }
   background: linear-gradient(90deg, var(--accent), var(--blue), var(--accent));
   background-size: 200% 100%;
   border-radius: 2px;
-  animation: progressFill 5.6s ease-in-out forwards, progressShimmer 1s linear infinite;
+  animation: progressShimmer 1.2s linear infinite;
 }
 @keyframes progressFill {
   from { width: 0; }
