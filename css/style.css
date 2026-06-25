@@ -63,7 +63,8 @@ a { color: inherit; text-decoration: none; }
 .navbar .nav-avatar {
   width: 32px; height: 32px;
   border-radius: 50%;
-  object-fit: cover;
+  object-fit: contain;
+  background: rgba(255,255,255,0.1);
   margin-right: 8px;
   vertical-align: middle;
 }
@@ -446,7 +447,9 @@ a { color: inherit; text-decoration: none; }
 .login-card .login-avatar {
   width: 80px; height: 80px;
   border-radius: 50%;
-  object-fit: cover;
+  object-fit: contain;
+  background: rgba(255,255,255,0.05);
+  padding: 4px;
   border: 3px solid rgba(255,255,255,0.2);
   box-shadow: 0 0 30px rgba(233,68,96,0.3);
   margin-bottom: 16px;
@@ -518,107 +521,205 @@ a { color: inherit; text-decoration: none; }
   margin-top: 6px;
 }
 
-/* 登录过渡动画 */
-.login-overlay {
+/* ========== 全屏电影级过渡动画 ========== */
+.cinematic-overlay {
   position: fixed; inset: 0;
-  background: #0f0c29;
+  background: radial-gradient(ellipse at center, #1a1040 0%, #0a0820 60%, #000010 100%);
   z-index: 9999;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  animation: overlayIn 0.6s ease-out;
+  overflow: hidden;
 }
-@keyframes overlayIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+.cinematic-overlay.fadeout {
+  animation: cinemaOut 0.6s ease-in forwards;
 }
-.login-overlay .welcome-text {
-  font-size: 2.8em;
-  font-weight: 800;
-  color: #fff;
-  letter-spacing: 4px;
-  animation: textZoom 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+@keyframes cinemaOut {
+  to { opacity: 0; transform: scale(1.05); filter: blur(10px); }
 }
-@keyframes textZoom {
-  from { transform: scale(0.3); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
-}
-.login-overlay .spark-container {
-  position: absolute; inset: 0;
-  pointer-events: none; overflow: hidden;
-}
-.login-overlay .spark {
-  position: absolute;
-  width: 6px; height: 6px;
-  background: var(--accent);
-  border-radius: 50%;
-  animation: sparkFly 1.5s ease-out forwards;
-}
-@keyframes sparkFly {
-  0% { transform: translate(0,0) scale(1); opacity: 1; }
-  100% { transform: translate(var(--dx), var(--dy)) scale(0); opacity: 0; }
-}
-.login-overlay .loading-ring {
-  width: 50px; height: 50px;
-  border: 3px solid rgba(255,255,255,0.1);
-  border-top-color: var(--accent);
-  border-radius: 50%;
-  margin-top: 24px;
-  animation: spin 0.8s linear infinite;
-}
-@keyframes spin { to { transform: rotate(360deg); } }
 
-/* ========== 吉伊咔哇三小只 ========== */
-.chiikawa-row {
-  display: flex; gap: 24px;
-  margin: 28px 0 8px;
+/* 星空背景 */
+.starfield {
+  position: absolute; inset: 0;
+  pointer-events: none;
+}
+.star {
+  position: absolute;
+  background: #fff;
+  border-radius: 50%;
+  animation: starTwinkle var(--dur) ease-in-out infinite;
+  animation-delay: var(--delay);
+}
+@keyframes starTwinkle {
+  0%,100% { opacity: 0.2; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.8); }
+}
+.shooting-star {
+  position: absolute;
+  width: 3px; height: 3px;
+  background: #fff;
+  border-radius: 50%;
+  animation: shoot 2s ease-out infinite;
+  animation-delay: var(--delay);
+}
+.shooting-star::after {
+  content: '';
+  position: absolute;
+  top: 50%; right: 100%;
+  width: 60px; height: 1px;
+  background: linear-gradient(to left, #fff, transparent);
+  transform: translateY(-50%);
+}
+@keyframes shoot {
+  0% { transform: translate(0,0); opacity: 0; }
+  10% { opacity: 1; }
+  100% { transform: translate(-300px, 200px); opacity: 0; }
+}
+
+/* 居中内容 */
+.cinematic-content {
+  display: flex; flex-direction: column;
+  align-items: center; gap: 20px;
+  position: relative; z-index: 1;
+}
+
+/* 头像光环 */
+.cinema-avatar-wrap {
+  position: relative;
+  animation: avatarEntry 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+@keyframes avatarEntry {
+  0% { transform: scale(0) rotate(-180deg); opacity: 0; }
+  100% { transform: scale(1) rotate(0); opacity: 1; }
+}
+.avatar-ring {
+  position: absolute; inset: -12px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  border-top-color: var(--accent);
+  border-right-color: var(--blue);
+  animation: ringSpin 2s linear infinite;
+}
+@keyframes ringSpin { to { transform: rotate(360deg); } }
+.avatar-ring::after {
+  content: ''; position: absolute; inset: -6px;
+  border-radius: 50%;
+  border: 1.5px solid transparent;
+  border-bottom-color: rgba(255,255,255,0.4);
+  border-left-color: rgba(255,255,255,0.3);
+  animation: ringSpin 3s linear infinite reverse;
+}
+.cinema-avatar {
+  width: 100px; height: 100px;
+  border-radius: 50%; object-fit: contain;
+  background: rgba(255,255,255,0.05);
+  padding: 6px;
+  border: 3px solid rgba(255,255,255,0.2);
+  box-shadow: 0 0 50px rgba(233,68,96,0.5), 0 0 100px rgba(74,108,247,0.25);
+}
+
+/* 标题 */
+.cinema-title {
+  font-size: 3em; font-weight: 900;
+  color: #fff;
+  letter-spacing: 6px;
+  text-shadow: 0 0 60px rgba(255,255,255,0.5), 0 0 120px rgba(233,68,96,0.4);
+  animation: titleReveal 1s 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+}
+@keyframes titleReveal {
+  0% { transform: translateY(40px) scale(0.5); opacity: 0; filter: blur(10px); }
+  100% { transform: translateY(0) scale(1); opacity: 1; filter: blur(0); }
+}
+.cinema-sub {
+  font-size: 1.1em;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 3px;
+  animation: titleReveal 1s 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+}
+
+/* 三小只舞台 */
+.chiikawa-stage {
+  display: flex; gap: 32px;
+  margin-top: 12px;
 }
 .chiikawa {
   display: flex; flex-direction: column;
-  align-items: center; gap: 8px;
-  animation: chiiBounce 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+  align-items: center; gap: 10px;
+  animation: charEntrance 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
 }
-.char1 { animation-delay: 0.2s; }
-.char2 { animation-delay: 0.5s; }
-.char3 { animation-delay: 0.8s; }
-
-@keyframes chiiBounce {
-  0% { transform: translateY(60px) scale(0); opacity: 0; }
-  60% { transform: translateY(-10px) scale(1.1); }
-  100% { transform: translateY(0) scale(1); opacity: 1; }
+.char1 { animation-delay: 1.0s; }
+.char2 { animation-delay: 1.3s; }
+.char3 { animation-delay: 1.6s; }
+@keyframes charEntrance {
+  0% { transform: translateY(100px) rotate(-20deg) scale(0); opacity: 0; }
+  60% { transform: translateY(-15px) rotate(5deg) scale(1.15); }
+  80% { transform: translateY(4px) rotate(-2deg); }
+  100% { transform: translateY(0) rotate(0) scale(1); opacity: 1; }
 }
-
-/* 角色图片 */
-.chii-img {
-  width: 72px; height: 72px;
+.chii-card {
+  width: 80px; height: 80px;
   border-radius: 50%;
-  object-fit: cover;
-  border: 2.5px solid rgba(255,255,255,0.35);
-  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-  animation: chiiWiggle 1.2s ease-in-out infinite;
+  padding: 3px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.25), rgba(255,255,255,0.05));
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  animation: cardFloat 2s ease-in-out infinite;
 }
-.char1 .chii-img { border-color: rgba(255,255,240,0.5); }
-.char2 .chii-img { border-color: rgba(200,220,240,0.5); }
-.char3 .chii-img { border-color: rgba(255,245,210,0.5); }
-
-@keyframes chiiWiggle {
-  0%,100% { transform: rotate(0); }
-  25% { transform: rotate(3deg); }
-  75% { transform: rotate(-3deg); }
+.char1 .chii-card { animation-delay: 0s; }
+.char2 .chii-card { animation-delay: 0.3s; }
+.char3 .chii-card { animation-delay: 0.6s; }
+@keyframes cardFloat {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.chii-card img {
+  width: 100%; height: 100%;
+  border-radius: 50%; object-fit: cover;
+  border: 2px solid rgba(255,255,255,0.3);
+}
+.chii-label {
+  color: rgba(255,255,255,0.6);
+  font-size: 0.85em;
+  letter-spacing: 2px;
+  font-weight: 600;
+  animation: labelFade 0.6s 2s ease-out both;
+}
+@keyframes labelFade {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-/* 名字 */
-.chii-name {
-  color: rgba(255,255,255,0.7);
-  font-size: 0.82em;
-  letter-spacing: 1px;
+/* 底部进度条 */
+.cinema-progress {
+  width: 200px; height: 3px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 2px;
+  margin-top: 8px;
+  overflow: hidden;
+}
+.cinema-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--blue), var(--accent));
+  background-size: 200% 100%;
+  border-radius: 2px;
+  animation: progressFill 3.5s ease-in-out forwards, progressShimmer 1s linear infinite;
+}
+@keyframes progressFill {
+  from { width: 0; }
+  to { width: 100%; }
+}
+@keyframes progressShimmer {
+  from { background-position: 200% 0; }
+  to { background-position: -200% 0; }
 }
 
 /* 手机适配 */
 @media (max-width: 600px) {
-  .chiikawa-row { gap: 12px; }
-  .chii-img { width: 56px; height: 56px; }
+  .cinema-avatar { width: 70px; height: 70px; }
+  .cinema-title { font-size: 1.6em; letter-spacing: 3px; }
+  .cinema-sub { font-size: 0.85em; letter-spacing: 1px; }
+  .chiikawa-stage { gap: 16px; }
+  .chii-card { width: 56px; height: 56px; }
+  .chii-label { font-size: 0.7em; }
 }
 
 /* ========== 响应式 ========== */

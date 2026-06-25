@@ -27,27 +27,36 @@
   <button class="login-btn" id="loginBtn" onclick="doLogin()">🚀 进入复习</button>
 </div>
 
-<!-- 过渡动画层 -->
-<div class="login-overlay" id="overlay" style="display:none;">
-  <div class="spark-container" id="sparkContainer"></div>
-  <img src="img/avatar.jpg" alt="江小白" style="width:90px;height:90px;border-radius:50%;object-fit:cover;border:3px solid rgba(255,255,255,0.3);margin-bottom:16px;box-shadow:0 0 40px rgba(233,68,96,0.4);">
-  <div class="welcome-text" id="welcomeText"></div>
-  <!-- 吉伊咔哇三小只 -->
-  <div class="chiikawa-row">
-    <div class="chiikawa char1">
-      <img src="img/chiikawa.jpg" alt="吉伊" class="chii-img">
-      <span class="chii-name">吉伊</span>
+<!-- 全屏过渡动画 -->
+<div class="cinematic-overlay" id="overlay" style="display:none;">
+  <div class="starfield" id="starfield"></div>
+  <div class="cinematic-content">
+    <!-- 头像 -->
+    <div class="cinema-avatar-wrap">
+      <div class="avatar-ring"></div>
+      <img src="img/avatar.jpg" alt="江小白" class="cinema-avatar">
     </div>
-    <div class="chiikawa char2">
-      <img src="img/hachiware.jpg" alt="小八" class="chii-img">
-      <span class="chii-name">小八</span>
+    <!-- 欢迎文字 -->
+    <div class="cinema-title" id="welcomeText"></div>
+    <div class="cinema-sub">三小只前来助阵，期末必过！</div>
+    <!-- 三小只 -->
+    <div class="chiikawa-stage">
+      <div class="chiikawa char1">
+        <div class="chii-card"><img src="img/chiikawa.jpg" alt="吉伊"></div>
+        <span class="chii-label">吉伊</span>
+      </div>
+      <div class="chiikawa char2">
+        <div class="chii-card"><img src="img/hachiware.jpg" alt="小八"></div>
+        <span class="chii-label">小八</span>
+      </div>
+      <div class="chiikawa char3">
+        <div class="chii-card"><img src="img/usagi.jpg" alt="乌萨奇"></div>
+        <span class="chii-label">乌萨奇</span>
+      </div>
     </div>
-    <div class="chiikawa char3">
-      <img src="img/usagi.jpg" alt="乌萨奇" class="chii-img">
-      <span class="chii-name">乌萨奇</span>
-    </div>
+    <!-- 进度条 -->
+    <div class="cinema-progress"><div class="cinema-progress-fill"></div></div>
   </div>
-  <div class="loading-ring"></div>
 </div>
 
 <script>
@@ -71,36 +80,44 @@ function doLogin() {
   btn.disabled = true;
   btn.textContent = '✓ 验证通过';
 
-  // 启动过渡动画
+  // 启动全屏电影级过渡动画
   const overlay = document.getElementById('overlay');
   const welcomeText = document.getElementById('welcomeText');
-  const sparkContainer = document.getElementById('sparkContainer');
+  const starfield = document.getElementById('starfield');
 
   overlay.style.display = 'flex';
-  welcomeText.textContent = '吉伊咔哇三小只来接你啦～ ✨';
+  welcomeText.textContent = '欢迎回来，江小白 ✨';
 
-  // 生成粒子
-  for (let i = 0; i < 40; i++) {
-    const spark = document.createElement('span');
-    spark.className = 'spark';
-    spark.style.left = '50%';
-    spark.style.top = '50%';
-    spark.style.setProperty('--dx', (Math.random() - 0.5) * 400 + 'px');
-    spark.style.setProperty('--dy', (Math.random() - 0.5) * 400 + 'px');
-    spark.style.animationDelay = Math.random() * 0.6 + 's';
-    spark.style.background = ['#fffef5','#dce8f5','#fff8e1','#ffccd5','#c5e0d5','#fde68a'][Math.floor(Math.random()*6)];
-    sparkContainer.appendChild(spark);
+  // 150颗星星
+  for (let i = 0; i < 150; i++) {
+    const star = document.createElement('span');
+    star.className = 'star';
+    star.style.left = Math.random() * 100 + '%';
+    star.style.top = Math.random() * 100 + '%';
+    star.style.width = star.style.height = (1 + Math.random() * 3) + 'px';
+    star.style.setProperty('--dur', (1.5 + Math.random() * 3) + 's');
+    star.style.setProperty('--delay', Math.random() * 3 + 's');
+    starfield.appendChild(star);
   }
 
-  // 延迟后跳转
+  // 8颗流星
+  for (let i = 0; i < 8; i++) {
+    const meteor = document.createElement('span');
+    meteor.className = 'shooting-star';
+    meteor.style.left = (20 + Math.random() * 60) + '%';
+    meteor.style.top = Math.random() * 40 + '%';
+    meteor.style.setProperty('--delay', (i * 0.4 + Math.random()) + 's');
+    starfield.appendChild(meteor);
+  }
+
+  // 3.6秒后淡出跳转
   setTimeout(() => {
-    overlay.style.opacity = '0';
-    overlay.style.transition = 'opacity 0.5s';
+    overlay.classList.add('fadeout');
     setTimeout(() => {
       sessionStorage.setItem('jxb_logged_in', 'true');
       window.location.href = 'index.html';
-    }, 500);
-  }, 2200);
+    }, 600);
+  }, 3600);
 }
 
 // 回车登录
