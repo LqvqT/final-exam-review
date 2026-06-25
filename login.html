@@ -30,31 +30,22 @@
 <!-- 全屏过渡动画 -->
 <div class="cinematic-overlay" id="overlay" style="display:none;">
   <div class="starfield" id="starfield"></div>
+
+  <!-- 霸屏图片层 -->
+  <div class="hero-image-stage" id="heroStage">
+    <img id="heroImg" src="" alt="" class="hero-image">
+    <div class="hero-label" id="heroLabel"></div>
+    <div class="hero-sparkles" id="heroSparkles"></div>
+  </div>
+
+  <!-- 前景内容 -->
   <div class="cinematic-content">
-    <!-- 头像 -->
     <div class="cinema-avatar-wrap">
       <div class="avatar-ring"></div>
       <img src="img/avatar.jpg" alt="江小白" class="cinema-avatar">
     </div>
-    <!-- 欢迎文字 -->
     <div class="cinema-title" id="welcomeText"></div>
     <div class="cinema-sub">三小只前来助阵，期末必过！</div>
-    <!-- 三小只 -->
-    <div class="chiikawa-stage">
-      <div class="chiikawa char1">
-        <div class="chii-card"><img src="img/chiikawa.jpg" alt="吉伊"></div>
-        <span class="chii-label">吉伊</span>
-      </div>
-      <div class="chiikawa char2">
-        <div class="chii-card"><img src="img/hachiware.jpg" alt="小八"></div>
-        <span class="chii-label">小八</span>
-      </div>
-      <div class="chiikawa char3">
-        <div class="chii-card"><img src="img/usagi.jpg" alt="乌萨奇"></div>
-        <span class="chii-label">乌萨奇</span>
-      </div>
-    </div>
-    <!-- 进度条 -->
     <div class="cinema-progress"><div class="cinema-progress-fill"></div></div>
   </div>
 </div>
@@ -84,6 +75,9 @@ function doLogin() {
   const overlay = document.getElementById('overlay');
   const welcomeText = document.getElementById('welcomeText');
   const starfield = document.getElementById('starfield');
+  const heroImg = document.getElementById('heroImg');
+  const heroLabel = document.getElementById('heroLabel');
+  const heroSparkles = document.getElementById('heroSparkles');
 
   overlay.style.display = 'flex';
   welcomeText.textContent = '欢迎回来，江小白 ✨';
@@ -110,14 +104,70 @@ function doLogin() {
     starfield.appendChild(meteor);
   }
 
-  // 3.6秒后淡出跳转
+  // 四张图片轮流展示
+  const pool = [
+    { src: 'img/chiikawa.jpg', label: '🐣 吉伊' },
+    { src: 'img/hachiware.jpg', label: '🐱 小八' },
+    { src: 'img/usagi.jpg', label: '🐰 乌萨奇' },
+  ];
+  // 前三张随机打乱
+  for (let i = pool.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [pool[i], pool[j]] = [pool[j], pool[i]];
+  }
+  // 最后一张：三小只同框
+  const sequence = [...pool, { src: 'img/three.jpg', label: '💫 三小只集合！' }];
+
+  let imgIndex = 0;
+  const totalDuration = 5000; // 总时长5秒
+  const imgInterval = totalDuration / sequence.length; // 每张约1.25秒
+
+  function showImage(idx) {
+    if (idx >= sequence.length) return;
+    const item = sequence[idx];
+
+    // 生成光点
+    heroSparkles.innerHTML = '';
+    for (let i = 0; i < 20; i++) {
+      const dot = document.createElement('span');
+      dot.className = 'hero-dot';
+      dot.style.left = Math.random() * 100 + '%';
+      dot.style.top = Math.random() * 100 + '%';
+      dot.style.animationDelay = Math.random() * 0.5 + 's';
+      heroSparkles.appendChild(dot);
+    }
+
+    heroImg.classList.remove('hero-in');
+    void heroImg.offsetWidth;
+    heroImg.src = item.src;
+    heroImg.alt = item.label;
+    heroLabel.textContent = item.label;
+    heroImg.classList.add('hero-in');
+
+    // 最后一张特殊效果
+    if (idx === sequence.length - 1) {
+      heroImg.style.animation = 'heroZoomFinal 2s ease-out forwards';
+      heroLabel.style.fontSize = '1.4em';
+      heroLabel.style.color = '#fde68a';
+    }
+
+    imgIndex++;
+    if (imgIndex < sequence.length) {
+      setTimeout(() => showImage(imgIndex), imgInterval);
+    }
+  }
+
+  // 0.5秒后开始展示
+  setTimeout(() => showImage(0), 500);
+
+  // 总时长后淡出跳转
   setTimeout(() => {
     overlay.classList.add('fadeout');
     setTimeout(() => {
       sessionStorage.setItem('jxb_logged_in', 'true');
       window.location.href = 'index.html';
     }, 600);
-  }, 3600);
+  }, totalDuration + 600);
 }
 
 // 回车登录

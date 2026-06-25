@@ -576,8 +576,65 @@ a { color: inherit; text-decoration: none; }
   100% { transform: translate(-300px, 200px); opacity: 0; }
 }
 
-/* 居中内容 */
+/* 霸屏图片层 */
+.hero-image-stage {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  z-index: 0;
+  opacity: 0.25;
+}
+.hero-image {
+  max-width: 85vw; max-height: 70vh;
+  object-fit: contain;
+  border-radius: 24px;
+  opacity: 0;
+  transform: scale(0.5);
+  transition: opacity 0.6s ease-out, transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 20px 80px rgba(0,0,0,0.4);
+}
+.hero-image.hero-in {
+  opacity: 1;
+  transform: scale(1);
+}
+@keyframes heroZoomFinal {
+  0% { transform: scale(0.8); opacity: 0; }
+  30% { transform: scale(1.15); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+.hero-label {
+  position: absolute; bottom: 15%;
+  left: 50%; transform: translateX(-50%);
+  color: #fff;
+  font-size: 1.1em;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-shadow: 0 0 30px rgba(0,0,0,0.6);
+  opacity: 0;
+  animation: labelPop 1s 0.3s ease-out forwards;
+}
+@keyframes labelPop {
+  from { opacity: 0; transform: translateX(-50%) translateY(10px); }
+  to { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+/* 光点 */
+.hero-sparkles { position: absolute; inset: 0; pointer-events: none; }
+.hero-dot {
+  position: absolute;
+  width: 4px; height: 4px;
+  background: #fff;
+  border-radius: 50%;
+  animation: dotPulse 1.2s ease-in-out infinite;
+  box-shadow: 0 0 6px #fff;
+}
+@keyframes dotPulse {
+  0%,100% { opacity: 0.2; transform: scale(1); }
+  50% { opacity: 1; transform: scale(2.5); }
+}
+
+/* 前景居中内容 */
 .cinematic-content {
+  position: relative; z-index: 1;
   display: flex; flex-direction: column;
   align-items: center; gap: 20px;
   position: relative; z-index: 1;
@@ -637,56 +694,6 @@ a { color: inherit; text-decoration: none; }
   animation: titleReveal 1s 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
 }
 
-/* 三小只舞台 */
-.chiikawa-stage {
-  display: flex; gap: 32px;
-  margin-top: 12px;
-}
-.chiikawa {
-  display: flex; flex-direction: column;
-  align-items: center; gap: 10px;
-  animation: charEntrance 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
-}
-.char1 { animation-delay: 1.0s; }
-.char2 { animation-delay: 1.3s; }
-.char3 { animation-delay: 1.6s; }
-@keyframes charEntrance {
-  0% { transform: translateY(100px) rotate(-20deg) scale(0); opacity: 0; }
-  60% { transform: translateY(-15px) rotate(5deg) scale(1.15); }
-  80% { transform: translateY(4px) rotate(-2deg); }
-  100% { transform: translateY(0) rotate(0) scale(1); opacity: 1; }
-}
-.chii-card {
-  width: 80px; height: 80px;
-  border-radius: 50%;
-  padding: 3px;
-  background: linear-gradient(135deg, rgba(255,255,255,0.25), rgba(255,255,255,0.05));
-  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-  animation: cardFloat 2s ease-in-out infinite;
-}
-.char1 .chii-card { animation-delay: 0s; }
-.char2 .chii-card { animation-delay: 0.3s; }
-.char3 .chii-card { animation-delay: 0.6s; }
-@keyframes cardFloat {
-  0%,100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
-.chii-card img {
-  width: 100%; height: 100%;
-  border-radius: 50%; object-fit: cover;
-  border: 2px solid rgba(255,255,255,0.3);
-}
-.chii-label {
-  color: rgba(255,255,255,0.6);
-  font-size: 0.85em;
-  letter-spacing: 2px;
-  font-weight: 600;
-  animation: labelFade 0.6s 2s ease-out both;
-}
-@keyframes labelFade {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
-}
 
 /* 底部进度条 */
 .cinema-progress {
@@ -701,7 +708,7 @@ a { color: inherit; text-decoration: none; }
   background: linear-gradient(90deg, var(--accent), var(--blue), var(--accent));
   background-size: 200% 100%;
   border-radius: 2px;
-  animation: progressFill 3.5s ease-in-out forwards, progressShimmer 1s linear infinite;
+  animation: progressFill 5.6s ease-in-out forwards, progressShimmer 1s linear infinite;
 }
 @keyframes progressFill {
   from { width: 0; }
