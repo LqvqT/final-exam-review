@@ -30,6 +30,7 @@
   <a href="#s7">七、网络安全</a>
   <a href="#s8">八、音频/视频服务</a>
   <a href="#s9">九、无线网络</a>
+  <a href="#s10">十、实验要点</a>
 </aside>
 
 <!-- ===== 正文 ===== -->
@@ -58,6 +59,11 @@
   <li><strong>TCP三次握手</strong> —— 🔥必考！要画出状态图，写出SYN/ACK/seq/ack变化</li>
   <li><strong>TCP四次挥手</strong> —— 与三次握手一起考</li>
   <li><strong>各协议端口号</strong>：HTTP(80), FTP(20/21), SMTP(25), DNS(53), DHCP(67/68), SNMP(161/162)</li>
+  <li><strong>C/S、B/S、P2P模式对比</strong>：相同点和不同点、各自例子</li>
+  <li><strong>常见中英文对照</strong>：LAN/WAN/HTTP/SMTP/DNS等缩写全称</li>
+  <li><strong>双绞线线序</strong>：T568A和T568B标准，工程常用哪种</li>
+  <li><strong>虚拟局域网VLAN</strong>：逻辑分组、可跨交换机、不能跨路由器</li>
+  <li><strong>实验考试</strong>：拓扑图绘制、配置清单、IP地址规划表</li>
 </ol>
 <p style="margin-top:8px;"><strong>📋 考试题型：</strong>单选题、判断题、填空题、简答题、解答题（大题2道，含计算）</p>
 </blockquote>
@@ -67,7 +73,7 @@
 
 <h3>1. 计算机网络的定义 ⭐</h3>
 <p>计算机网络是指将分布在不同地理位置，具有<strong>独立功能</strong>的许多计算机用<strong>传输介质</strong>连接起来，按照某种<strong>协议</strong>进行通信，并通过网络操作系统进行管理实现<strong>资源共享</strong>的系统。</p>
-<p><strong>根本目的：实现资源共享</strong></p>
+<p><strong>根本目的：实现资源共享。两个最基本特性：连通性和共享性。</strong></p>
 
 <h3>2. 互联网的组成</h3>
 <table>
@@ -146,11 +152,33 @@
   <li><strong>同步</strong>：事件实现顺序的详细说明</li>
 </ul>
 
-<h3>10. 端系统通信方式</h3>
+<h3>10. 端系统通信方式 ⭐</h3>
 <ul>
   <li><strong>C/S方式</strong>（客户-服务器）：客户是服务请求方，服务器是服务提供方</li>
   <li><strong>P2P方式</strong>（对等连接）：每个主机既是客户又是服务器</li>
+  <li><strong>B/S方式</strong>（浏览器-服务器）：C/S的一种特例，客户端是浏览器</li>
 </ul>
+<p><strong>C/S与B/S相同点：</strong>都是请求-响应模式。不同点：C/S需安装客户端软件，B/S只需浏览器即可。</p>
+
+<h3>11. 常见中英文对照</h3>
+<table>
+  <tr><th>缩写</th><th>英文全称</th><th>中文</th></tr>
+  <tr><td>LAN</td><td>Local Area Network</td><td>局域网</td></tr>
+  <tr><td>WAN</td><td>Wide Area Network</td><td>广域网</td></tr>
+  <tr><td>MAN</td><td>Metropolitan Area Network</td><td>城域网</td></tr>
+  <tr><td>PAN</td><td>Personal Area Network</td><td>个人区域网</td></tr>
+  <tr><td>ISP</td><td>Internet Service Provider</td><td>互联网服务提供者</td></tr>
+  <tr><td>HTTP</td><td>HyperText Transfer Protocol</td><td>超文本传输协议</td></tr>
+  <tr><td>SMTP</td><td>Simple Mail Transfer Protocol</td><td>简单邮件传输协议</td></tr>
+  <tr><td>DNS</td><td>Domain Name System</td><td>域名系统</td></tr>
+  <tr><td>FTP</td><td>File Transfer Protocol</td><td>文件传输协议</td></tr>
+  <tr><td>DHCP</td><td>Dynamic Host Configuration Protocol</td><td>动态主机配置协议</td></tr>
+  <tr><td>SNMP</td><td>Simple Network Management Protocol</td><td>简单网络管理协议</td></tr>
+  <tr><td>ARP</td><td>Address Resolution Protocol</td><td>地址解析协议</td></tr>
+  <tr><td>ICMP</td><td>Internet Control Message Protocol</td><td>网际控制报文协议</td></tr>
+  <tr><td>OSPF</td><td>Open Shortest Path First</td><td>开放最短路径优先</td></tr>
+  <tr><td>BGP</td><td>Border Gateway Protocol</td><td>边界网关协议</td></tr>
+</table>
 
 <hr>
 
@@ -212,6 +240,14 @@
   <tr><td>光纤</td><td>容量大、损耗小、抗电磁干扰、保密性好<br>多模光纤：LED光源，适合近距离<br>单模光纤：激光光源，适合远距离(几百公里)</td></tr>
   <tr><td>非导引型</td><td>无线电微波</td><td>直线传播，地球表面约50km；多径效应；卫星通信传播时延大(250~300ms)</td></tr>
 </table>
+
+<p><strong>双绞线线序标准：</strong></p>
+<table>
+  <tr><th>标准</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th></tr>
+  <tr><td>T568A</td><td>白绿</td><td>绿</td><td>白橙</td><td>蓝</td><td>白蓝</td><td>橙</td><td>白棕</td><td>棕</td></tr>
+  <tr><td>T568B</td><td>白橙</td><td>橙</td><td>白绿</td><td>蓝</td><td>白蓝</td><td>绿</td><td>白棕</td><td>棕</td></tr>
+</table>
+<p>T568B为工程常用。直通线两端标准相同，交叉线两端分别为A和B。</p>
 
 <h3>8. 信道复用技术 ⭐</h3>
 <table>
@@ -303,6 +339,13 @@
   <li>DIX Ethernet V2 和 IEEE 802.3（两个标准可互操作）</li>
   <li>采用曼彻斯特编码（频带宽度增加一倍）</li>
   <li>无连接工作方式，不编号不确认</li>
+</ul>
+
+<h3>10. 虚拟局域网 VLAN ⭐</h3>
+<ul>
+  <li><strong>定义</strong>：在现有局域网上利用软件方式实现的<strong>逻辑分组</strong></li>
+  <li><strong>特点</strong>：是局域网范围，<strong>可以跨越多个交换机</strong>，但<strong>不能跨越路由器</strong></li>
+  <li><strong>划分方法</strong>：基于交换机端口（最简单常用）、基于MAC地址、基于IP子网</li>
 </ul>
 
 <hr>
@@ -626,6 +669,27 @@
   <li><strong>蜂窝移动网络</strong>：2G→3G→4G(LTE)→5G</li>
   <li><strong>移动IP</strong>：支持主机在不同网络间移动时保持通信</li>
 </ul>
+
+<hr>
+
+<!-- ==================== 十、实验 ==================== -->
+<h2 id="s10">十、实验考试要点</h2>
+
+<h3>1. 实验考试要求</h3>
+<ul>
+  <li><strong>拓扑图</strong>：必须画出网络拓扑结构图（含主机、路由器、交换机、链路）</li>
+  <li><strong>配置清单</strong>：列出所有设备（型号、数量、价格）、人工费</li>
+  <li><strong>方案说明</strong>：先写目录，再写重点内容。包括冗余设计、出口安全等</li>
+  <li><strong>IP地址规划</strong>：表格形式（链路、接口、IP地址、子网掩码）</li>
+</ul>
+
+<h3>2. IP地址规划表格式</h3>
+<table>
+  <tr><th>链路</th><th>接口</th><th>IP地址</th><th>子网掩码</th></tr>
+  <tr><td>A-B</td><td>B</td><td>211.211.211.1</td><td>255.255.255.0</td></tr>
+  <tr><td>C-D</td><td>D</td><td>211.211.212.1</td><td>255.255.255.0</td></tr>
+</table>
+<p>规律：同一网段网络号相同，不同网段网络号不同。规划要有规律可循，方便后期维护。</p>
 
 <hr>
 
